@@ -1,9 +1,7 @@
-#!/bin/bash -i
- 
-# File: download_pentads.sh
-# Project: GODAS
-# File Created: Saturday, 7th August 2021 4:36:06 pm
-# Author: Gerardo Rivera Tello (grivera@igp.gob.pe)
+#!/bin/bash -l
+#Created on Sat Aug 07 16:36:06 2021
+#Author: Gerardo Rivera Tello
+#Email: grivera@igp.gob.pe
 
 # To download the whole directory, use the following command
 
