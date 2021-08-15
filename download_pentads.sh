@@ -16,21 +16,18 @@
 # You can set this variable to an specific date
 # or leave it like this to use the current date
 DATE=$(date +%Y/%m/%d)
-DATE="2021/08/03"
+# DATE="2021/08/03"
 
-DATA_DIR="/data/datos/godas/pentadas/test"
 DATA_DATE=$(date -d "${DATE} -15 days" +%Y%m%d)
 YEAR=$(date -d "${DATE} -15 days" +%Y)
 
 FILENAME="godas.P.${DATA_DATE}.grb"
-OUTPUT="${DATA_DIR}/${YEAR}"
+OUTPUT="${GODAS_GRB_DIR}/${YEAR}"
+
+cd $OUTPUT || echo "Couldn't find output folder, making one" && mkdir -p "$OUTPUT"
 
 BASE_LINK="https://cfs.ncep.noaa.gov/cfs/godas/pentad/${YEAR}/${FILENAME}"
 
 cd $OUTPUT
-echo wget --cut-dirs=4 -N $BASE_LINK
-echo wget --cut-dirs=4 -N "${BASE_LINK}.inv"
-
-# # Update ctl with new file count
-file_count=$(find ${DATA_DIR} -name 'godas.P.*.grb' | wc -l)
-echo "$file_count total files"
+wget --cut-dirs=4 -N $BASE_LINK || exit 1
+wget --cut-dirs=4 -N "${BASE_LINK}.inv"
