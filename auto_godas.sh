@@ -35,9 +35,9 @@ module unload grads/2.0.2
 module load opengrads/2.2.1.oga.1
 export GADDIR=/opt/opengrads/2.2.1.oga.1/data
 
-tgrid="gribmap -i godas_pentad_tgrid.ctl"
-ugrid="gribmap -i godas_pentad_ugrid.ctl"
-wgrid="gribmap -i godas_pentad_wgrid.ctl"
+tgrid="gribmap -i godas_pentad_tgrid.ctl -0"
+ugrid="gribmap -i godas_pentad_ugrid.ctl -0"
+wgrid="gribmap -i godas_pentad_wgrid.ctl -0"
 
 cd $GODAS_GRB_DIR
 screen -dmS tgrid bash -c "$tgrid ; $tgrid -old"
