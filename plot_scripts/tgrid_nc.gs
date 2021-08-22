@@ -1,9 +1,9 @@
 function main(args)
 'reinit'
-say "write_nc_ALL.gs " args
+say "write_nc.gs " args
 * Get arguments
 if (args='?' | args='')
-    say 'write_nc_ALL.gs requires 2 argument: GRB_DIR NC_DIR'
+    say 'write_nc.gs requires 2 argument: GRB_DIR NC_DIR'
     return
 else
     GRB_DIR=subwrd(args,1)
@@ -18,25 +18,20 @@ endif
 
 'open 'GRB_DIR'/godas_pentad_tgrid.ctl'
 
-i=1
-
-'set x 1 360'
-'set y 1 418'
-
-while ( i != 3037 )
-'set t 'i
+'set t last'
 'q time'
 tiempo=subwrd(result,3)
 tiempo=substr(tiempo,4,9)
 year=substr(tiempo,6,4)
 
-'!date -d 'tiempo' +%Y%m%d > sysdate.'i
-d = read('sysdate.'i)
-'!rm sysdate.'i
+'!date -d 'tiempo' +%Y%m%d > sysdate.dat'
+d = read('sysdate.dat')
+'!rm sysdate.dat'
 tiempo = sublin(d,2)
 filename = 'godas.P.'tiempo'.nc'
-say filename
 
+'set x 1 360'
+'set y 1 418'
 'set z 1'
 
 'define dbssbmxl = dbssbmxl'
@@ -74,13 +69,10 @@ say filename
 
 '!cdo merge tmp/*.nc tmp/'filename
 
-path=NC_DIR'/'year'/'
+path=NC_DIR'/tgrid/'year'/'
 
 '!cd 'path' || mkdir -p 'path
 '!mv tmp/'filename' 'path
-
-i=i+1
-endwhile
 
 'quit'
 
