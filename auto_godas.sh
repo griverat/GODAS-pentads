@@ -43,3 +43,13 @@ cd $GODAS_GRB_DIR
 screen -dmS tgrid bash -c "$tgrid ; $tgrid -old"
 screen -dmS ugrid bash -c "$ugrid ; $ugrid -old"
 screen -dmS wgrid bash -c "$wgrid ; $wgrid -old"
+
+# Wait until gribmap finishes
+while screen -list | grep -q tgrid
+do
+    sleep 1
+done
+
+# Convert grib to netcdf
+cd $GODAS_SCRIPTS_DIR/plot_scripts
+grads -blc "run tgrid_nc.gs $GODAS_GRB_DIR $GODAS_NC_DIR"
