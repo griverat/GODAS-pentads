@@ -15,7 +15,4 @@ GODAS_DATA_DIR="/data/datos/godas"
 export GODAS_GRB_DIR="$GODAS_DATA_DIR/pentadas"
 
 # Paths where outputs should be saved
-# export GODAS_BIN_DIR="$DUACS_DATA_DIR/grid_duacs_allsat_bin"
 export GODAS_NC_DIR="$GODAS_DATA_DIR/pentadas_nc"
-# export GODAS_PROJ_DIR="$DUACS_DATA_DIR/projL4"
-
