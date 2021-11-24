@@ -10,20 +10,21 @@ else
     NC_DIR=subwrd(args,2)
 endif
 
+'!cd tmp || mkdir tmp'
+
+i=1
+
+while ( i != 3055 )
+
 'set display color white'
 'c'
 'set grads off'
 
-'!cd tmp || mkdir tmp'
-
 'open 'GRB_DIR'/godas_pentad_tgrid.ctl'
-
-i=1
 
 'set x 1 360'
 'set y 1 418'
 
-while ( i != 3037 )
 'set t 'i
 'q time'
 tiempo=subwrd(result,3)
@@ -80,6 +81,8 @@ path=NC_DIR'/tgrid/'year'/'
 '!mv tmp/'filename' 'path
 
 i=i+1
+
+'reinit'
 endwhile
 
 'quit'
