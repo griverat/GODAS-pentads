@@ -15,23 +15,25 @@
 
 # You can set this variable to an specific date
 # or leave it like this to use the current date
-DATE=$(date +%Y/%m/%d)
+# DATE=$(date +%Y/%m/%d)
 # DATE="2021/08/28"
 
-for delta in {14..20}
-do
-    DATA_DATE=$(date -d "${DATE} -${delta} days" +%Y%m%d)
-    echo -e "\n\n###### Trying date ${DATA_DATE} ######\n"
-    YEAR=$(date -d "${DATE} -15 days" +%Y)
+# for delta in {14..20}
+# do
+#     DATA_DATE=$(date -d "${DATE} -${delta} days" +%Y%m%d)
+#     echo -e "\n\n###### Trying date ${DATA_DATE} ######\n"
+#     YEAR=$(date -d "${DATE} -15 days" +%Y)
     
-    FILENAME="godas.P.${DATA_DATE}.grb"
-    OUTPUT="${GODAS_GRB_DIR}/${YEAR}"
+#     FILENAME="godas.P.${DATA_DATE}.grb"
+#     OUTPUT="${GODAS_GRB_DIR}/${YEAR}"
     
-    cd $OUTPUT || echo "Couldn't find output folder, making one" && mkdir -p "$OUTPUT"
+#     cd $OUTPUT || echo "Couldn't find output folder, making one" && mkdir -p "$OUTPUT"
     
-    BASE_LINK="https://cfs.ncep.noaa.gov/cfs/godas/pentad/${YEAR}/${FILENAME}"
+#     BASE_LINK="https://cfs.ncep.noaa.gov/cfs/godas/pentad/${YEAR}/${FILENAME}"
     
-    cd $OUTPUT
-    wget --cut-dirs=4 -N $BASE_LINK || if [[ $delta -eq 20 ]]; then exit 1; else continue; fi
-    wget --cut-dirs=4 -N "${BASE_LINK}.inv"
-done
+#     cd $OUTPUT
+#     wget --cut-dirs=4 -N $BASE_LINK || if [[ $delta -eq 20 ]]; then exit 1; else continue; fi
+#     wget --cut-dirs=4 -N "${BASE_LINK}.inv"
+# done
+cd $GODAS_GRB_DIR
+rclone sync --http-url https://cfs.ncep.noaa.gov/cfs/godas/pentad :http: . -P --http-no-slash

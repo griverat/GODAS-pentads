@@ -13,11 +13,11 @@ cd $GODAS_SCRIPTS_DIR || exit
 # Run Download script
 sh download_pentads.sh
 
-if [ $? -eq 1 ]
-then
-    echo "Download failed. Maybe there's no new file"
-    exit 1
-fi
+# if [ $? -eq 1 ]
+# then
+#     echo "Download failed. Maybe there's no new file"
+#     exit 1
+# fi
 
 # Get new file count
 file_count=$(find ${GODAS_GRB_DIR} -name 'godas.P.*.grb' | wc -l)
